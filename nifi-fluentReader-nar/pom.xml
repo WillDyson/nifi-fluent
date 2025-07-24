@@ -27,12 +27,6 @@
     <packaging>nar</packaging>
 
     <dependencies>
-        <!--<dependency>
-            <groupId>com.cloudera.ps.example</groupId>
-            <artifactId>nifi-fluentReader-api-nar</artifactId>
-            <version>${version}</version>
-            <type>nar</type>
-        </dependency>-->
         <dependency>
             <groupId>org.apache.nifi</groupId>
             <artifactId>nifi-standard-services-api-nar</artifactId>

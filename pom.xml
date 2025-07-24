@@ -24,7 +24,10 @@
 
     <properties>
         <nifi.version>2.3.0.4.10.0.0-154</nifi.version>
-        <version>0.10</version>
+        <version>0.29</version>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <maven.compiler.source>21</maven.compiler.source>
+        <maven.compiler.target>21</maven.compiler.target>
     </properties>
 
     <groupId>com.cloudera.ps.example</groupId>

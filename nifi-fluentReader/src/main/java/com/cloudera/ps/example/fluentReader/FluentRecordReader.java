@@ -3,18 +3,16 @@ package com.cloudera.ps.example.fluentReader;
 import java.io.IOException;
 import java.util.Collections;
 import java.util.Iterator;
-import java.util.List;
 
 import org.apache.nifi.serialization.record.MapRecord;
 import org.apache.nifi.serialization.record.Record;
-import org.apache.nifi.serialization.record.RecordField;
-import org.apache.nifi.serialization.record.RecordFieldType;
 import org.apache.nifi.logging.ComponentLog;
 import org.apache.nifi.serialization.RecordReader;
-import org.apache.nifi.serialization.SimpleRecordSchema;
 import org.apache.nifi.serialization.record.RecordSchema;
 
 public class FluentRecordReader implements RecordReader { private final ComponentLog logger;
+    private static final RecordSchema FLUENT_RECORD_SCHEMA = new FluentRecordSchema();
+
     private final ParseFluent parser;
     private Iterator<FluentRecord> recordIter;
 
@@ -45,15 +43,11 @@ public class FluentRecordReader implements RecordReader { private final Componen
     }
 
     private Record createRecord(FluentRecord fluentRecord) {
-        return new MapRecord(getSchema(), Collections.unmodifiableMap(fluentRecord.toMap()));
+        return new MapRecord(FLUENT_RECORD_SCHEMA, Collections.unmodifiableMap(fluentRecord.toMap()));
     }
 
     @Override
     public RecordSchema getSchema() {
-        RecordField tagField = new RecordField("tag", RecordFieldType.STRING.getDataType());
-        RecordField epochField = new RecordField("epoch", RecordFieldType.LONG.getDataType());
-        RecordField entriesField = new RecordField("entries", RecordFieldType.MAP.getMapDataType(RecordFieldType.STRING.getDataType()));
-
-        return new SimpleRecordSchema(List.of(tagField, epochField, entriesField));
+        return FLUENT_RECORD_SCHEMA;
     }
 }
